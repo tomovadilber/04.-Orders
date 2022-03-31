@@ -1,0 +1,78 @@
+using System;
+using System.Text;
+using System.Collections.Generic;
+using System.Linq;
+
+
+namespace firstProblemMidleExam
+{
+    internal class Program
+
+    {
+        static void Main(string[] args)
+
+        {
+
+            List<string> input = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries).ToList();
+
+            string name = " ";
+            double sum = 0.00;
+            double qua = 0.00;
+
+            double totalPrice = 0;
+
+            Dictionary<string, double> price = new Dictionary<string, double>();
+
+            Dictionary<string, double> quantity = new Dictionary<string, double>();
+
+            while (true)
+            {
+                
+                if (input[0] == "buy")
+                {
+                    break;
+                }
+
+                else
+                {
+                    name = input[0];
+                    sum = double.Parse(input[1]);
+                    
+                    if (!price.ContainsKey(name))
+                    {
+                        qua = double.Parse(input[2]);
+                        price.Add(name, (sum * qua));
+                        quantity.Add(name, qua);
+                    }
+
+                    else
+                    {
+                        qua = double.Parse(input[2]) + quantity[name];
+                        sum = double.Parse(input[1]);
+                        price[name] = qua * sum;
+                        quantity[name] = qua;
+
+
+                    }
+                   
+                }
+
+                input = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries).ToList();
+            }
+
+
+
+            foreach (var item in price)
+            {
+                Console.WriteLine($"{item.Key} -> {item.Value:f2}");
+
+            }
+            
+
+
+
+
+
+        }
+    }
+}
